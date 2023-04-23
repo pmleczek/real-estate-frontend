@@ -1,3 +1,13 @@
+/* border */
+.border-bottom-light-gray {
+    border-bottom: 1px solid #fafafa;
+}
+
+/* font */
+.weight-500 {
+    font-weight: 500;
+}
+
 /* flexbox */
 .flex {
     display: flex;
@@ -11,7 +21,21 @@
     justify-content: center;
 }
 
+.content-between {
+    justify-content: space-between;
+}
+
+.gap-3 {
+    gap: 3rem;
+}
+
 /* height */
 .h-100vh {
     height: 100vh;
+}
+
+/* padding */
+.px-3 {
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
