@@ -1,0 +1,17 @@
+/* flexbox */
+.flex {
+    display: flex;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.content-center {
+    justify-content: center;
+}
+
+/* height */
+.h-100vh {
+    height: 100vh;
+}

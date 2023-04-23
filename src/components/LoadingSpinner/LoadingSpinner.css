@@ -1,0 +1,25 @@
+.spinner {
+    width: 4rem;
+    height: 4rem;
+    border: 0.35rem solid #3944bc;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1.25s linear infinite;
+}
+
+@media (prefers-reduced-motion) {
+    .spinner {
+        animation: none;
+    }
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
