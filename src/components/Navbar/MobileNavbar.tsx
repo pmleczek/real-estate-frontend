@@ -2,6 +2,8 @@ import React, {useRef, useState} from "react";
 import "./MobileNavbar.css";
 import {Link} from "react-router-dom";
 import useClickOutside from "../../hooks/useClickOutside";
+import MenuIcon from "../icons/MenuIcon";
+import CloseIcon from "../icons/CloseIcon";
 
 const MobileNavbar = () => {
     const [show, setShow] = useState<boolean>(false);
@@ -21,8 +23,8 @@ const MobileNavbar = () => {
         <div ref={ref} className="flex flex-column">
             <div className="navbar-mobile flex items-center content-between border-bottom-light-gray px-2">
                 <Link to="/">Logo</Link>
-                <button onClick={handleClick}>
-                    {show ? "Hide" : "Show"}
+                <button className="navbar-mobile-toggle" onClick={handleClick}>
+                    {show ? <CloseIcon /> : <MenuIcon />}
                 </button>
             </div>
             <div className={show ?

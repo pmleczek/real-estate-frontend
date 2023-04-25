@@ -5,3 +5,12 @@
 .navbar-mobile-menu {
     top: 4rem;
 }
+
+.navbar-mobile-toggle svg {
+    width: 2rem;
+    height: 2rem;
+}
+
+.navbar-mobile-toggle:active {
+    -webkit-tap-highlight-color: transparent;
+}
