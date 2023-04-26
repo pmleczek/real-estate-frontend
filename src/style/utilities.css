@@ -1,6 +1,24 @@
+/* background */
+.bg-white {
+    background-color: #fff;
+}
+
+.bg-light-gray {
+    background-color: #ededed;
+}
+
 /* border */
 .border-bottom-light-gray {
     border-bottom: 1px solid #fafafa;
+}
+
+.radius-05 {
+    border-radius: 0.5rem;
+}
+
+/* display */
+.none {
+    display: none;
 }
 
 /* font */
@@ -13,8 +31,20 @@
     display: flex;
 }
 
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
 .items-center {
     align-items: center;
+}
+
+.items-stretch {
+    align-items: stretch;
 }
 
 .content-center {
@@ -35,7 +65,36 @@
 }
 
 /* padding */
+.px-1 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.px-2 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
 .px-3 {
     padding-left: 3rem;
     padding-right: 3rem;
+}
+
+.py-075 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+/* position */
+.absolute {
+    position: absolute;
+}
+
+/* width */
+.w-half {
+    width: 50%;
+}
+
+.w-full {
+    width: 100%;
 }

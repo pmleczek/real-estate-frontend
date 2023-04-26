@@ -7,3 +7,7 @@
 a, button {
     cursor: pointer;
 }
+
+svg {
+    pointer-events: none;
+}
