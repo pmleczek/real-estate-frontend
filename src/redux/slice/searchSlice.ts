@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 interface State {
-    type: "buy" | "rent";
+    type: string;
     lat: number;
     lon: number;
 }
@@ -16,7 +16,7 @@ export const searchSlice = createSlice({
     name: "search",
     initialState,
     reducers: {
-        setType: (state, action: PayloadAction<"buy" | "rent">) => {
+        setType: (state, action: PayloadAction<string>) => {
             state.type = action.payload;
         },
         setCoordinates: (state, action: PayloadAction<number[]>) => {
