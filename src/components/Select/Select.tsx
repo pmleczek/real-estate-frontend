@@ -14,7 +14,8 @@ interface Props {
     options: SelectOption[];
     onChange?: (newValue: string | null) => void;
     id?: string;
-
+    className?: string;
+    prefix?: String;
 }
 
 const Select = (props: Props) => {
@@ -43,11 +44,11 @@ const Select = (props: Props) => {
 
     return (
         <div id={props.id} onClick={() => setShow(!show)} ref={ref}
-             className="select relative pointer">
+             className={"select relative pointer " + props.className}>
             <div className={`${show ?
                 "border-bottom-ts" :
                 "radius-bottom-05 border-bottom-light-gray"} h-full flex radius-top-05 items-center content-between px-1 border-right-light-gray border-left-light-gray border-top-light-gray`}>
-                <span>{props.options.filter(option => option.value === selectedValue)[0].title}</span>
+                <span><span className="weight-500">{props.prefix}</span>{props.options.filter(option => option.value === selectedValue)[0].title}</span>
                 {show ? <ChevronUpIcon/> : <ChevronDownIcon/>}
             </div>
             {show ? (
