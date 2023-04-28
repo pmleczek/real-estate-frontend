@@ -46,14 +46,14 @@ const Select = (props: Props) => {
              className="select relative pointer">
             <div className={`${show ?
                 "border-bottom-ts" :
-                "radius-bottom-05 border-bottom-light-gray"} flex radius-top-05 items-center content-between px-1 border-right-light-gray border-left-light-gray border-top-light-gray`}>
+                "radius-bottom-05 border-bottom-light-gray"} h-full flex radius-top-05 items-center content-between px-1 border-right-light-gray border-left-light-gray border-top-light-gray`}>
                 <span>{props.options.filter(option => option.value === selectedValue)[0].title}</span>
                 {show ? <ChevronUpIcon/> : <ChevronDownIcon/>}
             </div>
             {show ? (
-                <div className="absolute w-full radius-bottom-05 bg-white" onClick={handleClick}>
+                <div className="absolute w-full" onClick={handleClick}>
                     {props.options.filter(option => option.value !== selectedValue).map(option => (
-                        <div className="select-option px-1 w-full border-left-light-gray border-right-light-gray" data-value={option.value}
+                        <div className="select-option bg-white border-top-light-gray px-1 w-full border-left-light-gray border-right-light-gray" data-value={option.value}
                              key={option.value}>{option.title}
                         </div>
                     ))}
