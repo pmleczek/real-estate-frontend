@@ -5,6 +5,7 @@ interface State {
     lat: number;
     lon: number;
     locationName: string;
+    sortBy: string;
 }
 
 const initialState: State = {
@@ -12,6 +13,7 @@ const initialState: State = {
     lat: 37.77120182217527,
     lon:  -122.42068719056694,
     locationName: "",
+    sortBy: "recent"
 }
 
 export const searchSlice = createSlice({
@@ -30,9 +32,12 @@ export const searchSlice = createSlice({
         setLocationName: (state, action: PayloadAction<string>) => {
             state.locationName = action.payload;
         },
+        setSortBy: (state, action: PayloadAction<string>) => {
+            state.sortBy = action.payload;
+        },
     },
 });
 
-export const { setType, setCoordinates, setLocationName } = searchSlice.actions;
+export const { setType, setCoordinates, setLocationName, setSortBy } = searchSlice.actions;
 
 export default searchSlice.reducer;
