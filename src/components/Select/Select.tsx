@@ -1,5 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import useClickOutside from "../../hooks/useClickOutside";
+import ChevronDownIcon from "../icons/ChevronDownIcon";
+import ChevronUpIcon from "../icons/ChevronUpIcon";
 
 interface SelectOption {
     value: string;
@@ -10,6 +12,7 @@ interface Props {
     initialValue: string;
     options: SelectOption[];
     onChange?: (newValue: string | null) => void;
+    id?: string;
 
 }
 
@@ -38,8 +41,11 @@ const Select = (props: Props) => {
     }, [props.initialValue]);
 
     return (
-        <div onClick={() => setShow(!show)} ref={ref} className="select border-light-gray px-1 pointer">
-            <div>{props.options.filter(option => option.value === selectedValue)[0].title}</div>
+        <div id={props.id} onClick={() => setShow(!show)} ref={ref} className="select border-light-gray px-1 pointer">
+            <div className="flex items-center content-between">
+                <span>{props.options.filter(option => option.value === selectedValue)[0].title}</span>
+                { show ? <ChevronUpIcon /> : <ChevronDownIcon /> }
+            </div>
             {show ? (
                 <div className="absolute" onClick={handleClick}>
                     {props.options.filter(option => option.value !== selectedValue).map(option => (
