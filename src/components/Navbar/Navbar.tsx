@@ -8,7 +8,7 @@ const Navbar = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className="navbar flex items-center content-between px-3 border-bottom-light-gray">
+        <div className="navbar flex items-center content-between px-3">
             <Link to="/">Logo</Link>
             <div className="flex items-center gap-3 weight-500">
                 <button onClick={() => dispatch(setType("buy"))}>Buy</button>
@@ -17,11 +17,11 @@ const Navbar = () => {
                     Sell
                 </Link>
             </div>
-            <div className="flex items-center gap-3 weight-500">
+            <div className="flex items-center gap-2 weight-500">
                 <Link to="/login">
                     Sign in
                 </Link>
-                <Link to="/register">
+                <Link id="register-link" className="bg-primary text-white radius-05 px-1 py-05" to="/register">
                     Sign up
                 </Link>
             </div>
