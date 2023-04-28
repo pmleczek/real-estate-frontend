@@ -9,7 +9,7 @@ const Navbar = () => {
 
     return (
         <div className="navbar flex items-center content-between px-3">
-            <Link to="/">Logo</Link>
+            <Link className="navbar-logo" to="/">Home<span className="text-primary">Finder</span></Link>
             <div className="flex items-center gap-3 weight-500">
                 <button onClick={() => dispatch(setType("buy"))}>Buy</button>
                 <button onClick={() => dispatch(setType("rent"))}>Rent</button>
