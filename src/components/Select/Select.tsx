@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
+import "./Select.css";
 import useClickOutside from "../../hooks/useClickOutside";
 import ChevronDownIcon from "../icons/ChevronDownIcon";
 import ChevronUpIcon from "../icons/ChevronUpIcon";
@@ -25,7 +26,7 @@ const Select = (props: Props) => {
     }
 
     const ref = useRef(null);
-    useClickOutside({ ref, callback: handleClickOutside });
+    useClickOutside({ref, callback: handleClickOutside});
 
     const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target instanceof Element) {
@@ -41,15 +42,20 @@ const Select = (props: Props) => {
     }, [props.initialValue]);
 
     return (
-        <div id={props.id} onClick={() => setShow(!show)} ref={ref} className="select border-light-gray px-1 pointer">
-            <div className="flex items-center content-between">
+        <div id={props.id} onClick={() => setShow(!show)} ref={ref}
+             className="select relative pointer">
+            <div className={`${show ?
+                "border-bottom-ts" :
+                "radius-bottom-05 border-bottom-light-gray"} flex radius-top-05 items-center content-between px-1 border-right-light-gray border-left-light-gray border-top-light-gray`}>
                 <span>{props.options.filter(option => option.value === selectedValue)[0].title}</span>
-                { show ? <ChevronUpIcon /> : <ChevronDownIcon /> }
+                {show ? <ChevronUpIcon/> : <ChevronDownIcon/>}
             </div>
             {show ? (
-                <div className="absolute" onClick={handleClick}>
+                <div className="absolute w-full radius-bottom-05 bg-white" onClick={handleClick}>
                     {props.options.filter(option => option.value !== selectedValue).map(option => (
-                        <div data-value={option.value} key={option.value}>{option.title}</div>
+                        <div className="select-option px-1 w-full border-left-light-gray border-right-light-gray" data-value={option.value}
+                             key={option.value}>{option.title}
+                        </div>
                     ))}
                 </div>
             ) : null}
