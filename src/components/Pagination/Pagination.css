@@ -1,0 +1,13 @@
+.pagination-button {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+.pagination-button:not(.pagination-button:last-child) {
+    border-right: 1px solid #ededed;
+}
+
+.pagination-button:not(.inactive):hover, .pagination-button:not(.inactive):active {
+    background-color: #ededed;
+}
