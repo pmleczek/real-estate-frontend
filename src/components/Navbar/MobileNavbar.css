@@ -4,6 +4,7 @@
 
 .navbar-mobile-menu {
     top: 4rem;
+    z-index: 60;
 }
 
 .navbar-mobile-toggle svg {
