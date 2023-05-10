@@ -25,7 +25,7 @@ const LocationSearch = () => {
 
     useEffect(() => {
         if (query !== "") {
-            fetch(`http://localhost:8080/api/v1/location/graphql`, {
+            fetch("http://localhost:8080/api/v1/location/graphql", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -44,20 +44,40 @@ const LocationSearch = () => {
                 }),
             })
                 .then(res => res.json())
-                .then(data => setLocations(data.data.locations))
+                .then(body => setLocations(body.data.locations))
                 .catch(error => console.log(error));
         }
     }, [query]);
 
     const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.target instanceof Element) {
-            fetch("https://localhost:8080/api/v1/location/" + e.target.getAttribute("data-id"))
+        if (e.target instanceof Element && e.target.getAttribute("data-id")) {
+            fetch("http://localhost:8080/api/v1/location/graphql", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    query: `query getLocationById($id: String!) {
+                        location(id: $id) {
+                            _id,
+                            name,
+                            state,
+                            coordinates
+                        }
+                    }`,
+                    variables: {
+                        id: e.target.getAttribute("data-id"),
+                    },
+                })
+            })
                 .then(res => res.json())
-                .then((location: FullLocation) => {
-                    dispatch(setCoordinates(location.coordinates));
-                    dispatch(setLocationName(location.name + ", " + location.state));
+                .then(body => {
+                    dispatch(setCoordinates(body.data.location.coordinates));
+                    dispatch(setLocationName(body.data.location.name + ", " + body.data.location.state));
                 })
                 .catch(error => console.log(error));
+            setShow(false);
+            setQuery("");
         }
     }
 
@@ -74,7 +94,7 @@ const LocationSearch = () => {
                  onClick={handleClick}>{locations.map(location => (
                 <div
                     className="px-1 pointer border-bottom-light-gray border-left-light-gray border-right-light-gray"
-                    id={location._id} key={location._id}>{location.name}, {location.state}</div>
+                    data-id={location._id} key={location._id}>{location.name}, {location.state}</div>
             ))}</div>
         </div>
     );
