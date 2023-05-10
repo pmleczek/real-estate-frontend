@@ -31,7 +31,7 @@ const MobileNavbar = () => {
     return (
         <div ref={ref} className="flex flex-column">
             <div className="navbar-mobile flex items-center content-between border-bottom-light-gray px-2">
-                <Link to="/">Logo</Link>
+                <Link className="navbar-logo" to="/">Home<span className="text-primary">Finder</span></Link>
                 <button className="navbar-mobile-toggle" onClick={handleClick}>
                     {show ? <CloseIcon /> : <MenuIcon />}
                 </button>
