@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {useDispatch} from "react-redux";
 import {setCoordinates, setLocationName} from "../../redux/slice/searchSlice";
 import useClickOutside from "../../hooks/useClickOutside";
+import {fetchLocationById, fetchLocationsByQuery} from "../../api/calls";
 
 interface Location {
     _id: string;
@@ -25,25 +26,7 @@ const LocationSearch = () => {
 
     useEffect(() => {
         if (query !== "") {
-            fetch("http://localhost:8080/api/v1/location/graphql", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    query: `query getLocationsBySearch($search: String!) {
-                        locations(search: $search) {
-                            _id,
-                            name,
-                            state
-                        }
-                    }`,
-                    variables: {
-                        search: query,
-                    },
-                }),
-            })
-                .then(res => res.json())
+            fetchLocationsByQuery(query)
                 .then(body => setLocations(body.data.locations))
                 .catch(error => console.log(error));
         }
@@ -51,26 +34,7 @@ const LocationSearch = () => {
 
     const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target instanceof Element && e.target.getAttribute("data-id")) {
-            fetch("http://localhost:8080/api/v1/location/graphql", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    query: `query getLocationById($id: String!) {
-                        location(id: $id) {
-                            _id,
-                            name,
-                            state,
-                            coordinates
-                        }
-                    }`,
-                    variables: {
-                        id: e.target.getAttribute("data-id"),
-                    },
-                })
-            })
-                .then(res => res.json())
+            fetchLocationById(e.target.getAttribute("data-id"))
                 .then(body => {
                     dispatch(setCoordinates(body.data.location.coordinates));
                     dispatch(setLocationName(body.data.location.name + ", " + body.data.location.state));
