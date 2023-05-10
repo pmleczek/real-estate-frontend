@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./MapDisplay.css";
 import {MapContainer, TileLayer} from "react-leaflet";
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
 import DragHandler from "./DragHandler";
+import StateHandler from "./StateHandler";
 
 const MapDisplay = () => {
     const searchState = useSelector((state: RootState) => state.search);
@@ -16,6 +17,7 @@ const MapDisplay = () => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <DragHandler />
+                <StateHandler />
             </MapContainer>
         </div>
     );
