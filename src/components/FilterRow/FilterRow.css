@@ -1,0 +1,32 @@
+.filter-row input, .filter-row .select, .filter-row .dropdown div {
+    height: 2.75rem;
+}
+
+.filter-row .dropdown div {
+    line-height: 2.75rem;
+}
+
+.filter-row .dropdown {
+    z-index: 50;
+}
+
+.filter-row .location-search {
+    grid-column: span 3;
+}
+
+#type-select {
+    width: 7.5rem;
+}
+
+#sortby-select {
+    width: 12rem;
+}
+
+.location-search {
+    width: 18rem;
+}
+
+.filter-row .select-option {
+    height: 2.75rem;
+    line-height: 2.75rem;
+}
