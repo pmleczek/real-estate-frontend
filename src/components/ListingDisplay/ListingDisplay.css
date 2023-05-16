@@ -1,0 +1,16 @@
+@media (max-width: 1199px) {
+    .listing-display {
+        width: 100%;
+    }
+}
+
+.card-container {
+    display: grid;
+    height: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem 0.75rem;
+}
+
+.listing-card {
+    max-height: 137px;
+}
