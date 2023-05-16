@@ -5,7 +5,7 @@ import {setListings as setStoreListings} from "../../redux/slice/listingSlice";
 import {RootState} from "../../redux/store";
 import Pagination from "../Pagination/Pagination";
 import ListingCard from "../ListingCard/ListingCard";
-import {fetchListingCountBySearchState, fetchListingsBySearchState} from "../../api/calls";
+import {fetchListingCountBySearchState, fetchListingMarkerData, fetchListingsBySearchState} from "../../api/calls";
 
 export interface Location {
     type?: string;
@@ -34,9 +34,9 @@ const ListingDisplay = () => {
 
     useEffect(() => {
         fetchListingsBySearchState(searchState, page)
-            .then(data => {
-                setListings(data.data.listings);
-                dispatch(setStoreListings(data.data.listings));
+            .then(body => {
+                setListings(body.data.listings);
+                dispatch(setStoreListings(body.data.listings));
             })
             .catch(error => console.log(error));
         fetchListingCountBySearchState(searchState, page)
