@@ -46,12 +46,12 @@ export const fetchLocationsByQuery = (query: string) => {
 }
 
 export const fetchListingsBySearchState = (searchState: RootState["search"], page: number) => {
-    return fetch("http://localhost:8080/api/v1/listing/graphql", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+    return fetch("http://localhost:8080/api/v1/listing/graphql",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify({
                 query: `query getListings($searchInput: SearchInput!) {
                         listings(searchInput: $searchInput) {
@@ -77,8 +77,7 @@ export const fetchListingsBySearchState = (searchState: RootState["search"], pag
                 },
             }),
         })
-    })
-        .then(res => res.json());
+            .then(res => res.json());
 }
 
 export const fetchListingCountBySearchState = (searchState: RootState["search"], page: number) => {
@@ -106,4 +105,37 @@ export const fetchListingCountBySearchState = (searchState: RootState["search"],
             }),
         })
             .then(res => res.json());
+}
+
+export const fetchListingMarkerData = (searchState: RootState["search"]) => {
+    return fetch("http://localhost:8080/api/v1/listing/graphql",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                query: `query getListings($searchInput: SearchInput!) {
+                        listings(searchInput: $searchInput) {
+                            _id,
+                            location {
+                                coordinates,
+                            },
+                            price,
+                        }
+                    }
+                    `,
+                variables: {
+                    searchInput: {
+                        lat: searchState.lat,
+                        lon: searchState.lon,
+                        range: 5_000,
+                        listingType: searchState.type,
+                        offset: 0,
+                        limit: 10_000,
+                    },
+                },
+            }),
+        })
+        .then(res => res.json());
 }
