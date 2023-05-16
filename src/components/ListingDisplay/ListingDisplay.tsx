@@ -5,6 +5,7 @@ import {setListings as setStoreListings} from "../../redux/slice/listingSlice";
 import {RootState} from "../../redux/store";
 import Pagination from "../Pagination/Pagination";
 import ListingCard from "../ListingCard/ListingCard";
+import {fetchListingCountBySearchState, fetchListingsBySearchState} from "../../api/calls";
 
 export interface Location {
     type?: string;
@@ -32,67 +33,13 @@ const ListingDisplay = () => {
     }
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/v1/listing/graphql",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    query: `query getListings($searchInput: SearchInput!) {
-                        listings(searchInput: $searchInput) {
-                            _id,
-                            address,
-                            location {
-                                coordinates,
-                            },
-                            listingType,
-                            price,
-                        }
-                    }
-                    `,
-                    variables: {
-                        searchInput: {
-                            lat: searchState.lat,
-                            lon: searchState.lon,
-                            range: 5_000,
-                            listingType: searchState.type,
-                            offset: 12 * page,
-                            limit: 12,
-                        },
-                    },
-                }),
-            })
-            .then(res => res.json())
+        fetchListingsBySearchState(searchState, page)
             .then(data => {
                 setListings(data.data.listings);
                 dispatch(setStoreListings(data.data.listings));
             })
             .catch(error => console.log(error));
-        fetch("http://localhost:8080/api/v1/listing/graphql",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    query: `query getListings($searchInput: SearchInput!) {
-                        listingCount(searchInput: $searchInput)
-                    }
-                    `,
-                    variables: {
-                        searchInput: {
-                            lat: searchState.lat,
-                            lon: searchState.lon,
-                            range: 5_000,
-                            listingType: searchState.type,
-                            offset: 12 * page,
-                            limit: 12,
-                        },
-                    },
-                }),
-            })
-            .then(res => res.json())
+        fetchListingCountBySearchState(searchState, page)
             .then(body => setCount(body.data.listingCount))
             .catch(error => console.log(error));
     }, [searchState, page]);
