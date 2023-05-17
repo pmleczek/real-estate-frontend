@@ -1,7 +1,9 @@
 import {RootState} from "../redux/store";
 
+const HOST_URL = "http://192.168.1.22:8080"
+
 export const fetchLocationById = (id: string | null) => {
-    return fetch("http://localhost:8080/api/v1/location/graphql", {
+    return fetch(HOST_URL + "/api/v1/location/graphql", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -24,7 +26,7 @@ export const fetchLocationById = (id: string | null) => {
 }
 
 export const fetchLocationsByQuery = (query: string) => {
-    return fetch("http://localhost:8080/api/v1/location/graphql", {
+    return fetch(HOST_URL + "/api/v1/location/graphql", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -46,7 +48,7 @@ export const fetchLocationsByQuery = (query: string) => {
 }
 
 export const fetchListingsBySearchState = (searchState: RootState["search"], page: number) => {
-    return fetch("http://localhost:8080/api/v1/listing/graphql",
+    return fetch(HOST_URL + "/api/v1/listing/graphql",
         {
             method: "POST",
             headers: {
@@ -62,6 +64,8 @@ export const fetchListingsBySearchState = (searchState: RootState["search"], pag
                             },
                             listingType,
                             price,
+                            bathrooms,
+                            bedrooms
                         }
                     }
                     `,
@@ -69,7 +73,7 @@ export const fetchListingsBySearchState = (searchState: RootState["search"], pag
                     searchInput: {
                         lat: searchState.lat,
                         lon: searchState.lon,
-                        range: 5_000,
+                        range: searchState.range,
                         listingType: searchState.type,
                         offset: 12 * page,
                         limit: 12,
@@ -81,7 +85,7 @@ export const fetchListingsBySearchState = (searchState: RootState["search"], pag
 }
 
 export const fetchListingCountBySearchState = (searchState: RootState["search"], page: number) => {
-    return fetch("http://localhost:8080/api/v1/listing/graphql",
+    return fetch(HOST_URL + "/api/v1/listing/graphql",
         {
             method: "POST",
             headers: {
@@ -96,7 +100,7 @@ export const fetchListingCountBySearchState = (searchState: RootState["search"],
                     searchInput: {
                         lat: searchState.lat,
                         lon: searchState.lon,
-                        range: 5_000,
+                        range: searchState.range,
                         listingType: searchState.type,
                         offset: 12 * page,
                         limit: 12,
@@ -108,7 +112,7 @@ export const fetchListingCountBySearchState = (searchState: RootState["search"],
 }
 
 export const fetchListingMarkerData = (searchState: RootState["search"]) => {
-    return fetch("http://localhost:8080/api/v1/listing/graphql",
+    return fetch(HOST_URL + "/api/v1/listing/graphql",
         {
             method: "POST",
             headers: {
@@ -129,7 +133,7 @@ export const fetchListingMarkerData = (searchState: RootState["search"]) => {
                     searchInput: {
                         lat: searchState.lat,
                         lon: searchState.lon,
-                        range: 5_000,
+                        range: searchState.range,
                         listingType: searchState.type,
                         offset: 0,
                         limit: 10_000,
