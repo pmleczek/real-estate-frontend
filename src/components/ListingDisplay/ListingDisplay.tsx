@@ -1,32 +1,17 @@
 import React, {useEffect, useState} from "react";
 import "./ListingDisplay.css";
-import {useDispatch, useSelector} from "react-redux";
-import {setListings as setStoreListings} from "../../redux/slice/listingSlice";
+import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
 import Pagination from "../Pagination/Pagination";
 import ListingCard from "../ListingCard/ListingCard";
-import {fetchListingCountBySearchState, fetchListingMarkerData, fetchListingsBySearchState} from "../../api/calls";
-
-export interface Location {
-    type?: string;
-    coordinates: number[];
-}
-
-export interface Listing {
-    _id: string;
-    address: string;
-    location: Location;
-    listingType: string;
-    price: number;
-}
+import {fetchListingCountBySearchState, fetchListingsBySearchState} from "../../api/calls";
+import {Listing} from "../../types";
 
 const ListingDisplay = () => {
     const [listings, setListings] = useState<Listing[]>([]);
     const [count, setCount] = useState<number>(0);
     const [page, setPage] = useState<number>(0);
     const searchState = useSelector((state: RootState) => state.search);
-
-    const dispatch = useDispatch();
 
     const handlePageUpdate = (newPage: number) => {
         setPage(newPage - 1);
@@ -36,7 +21,6 @@ const ListingDisplay = () => {
         fetchListingsBySearchState(searchState, page)
             .then(body => {
                 setListings(body.data.listings);
-                dispatch(setStoreListings(body.data.listings));
             })
             .catch(error => console.log(error));
         fetchListingCountBySearchState(searchState, page)
