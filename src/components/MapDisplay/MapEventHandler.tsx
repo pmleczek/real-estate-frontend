@@ -3,7 +3,7 @@ import {useMapEvents} from "react-leaflet";
 import {useDispatch} from "react-redux";
 import {setCoordinates, setRange} from "../../redux/slice/searchSlice";
 
-const DragHandler = () => {
+const MapEventHandler = () => {
     const dispatch = useDispatch();
 
     const updateRange = (zoom: number) => {
@@ -30,4 +30,4 @@ const DragHandler = () => {
     return null;
 }
 
-export default DragHandler;
+export default MapEventHandler;
